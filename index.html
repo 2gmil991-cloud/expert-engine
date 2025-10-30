@@ -641,33 +641,33 @@
                         <button class="btn btn-primary" onclick="showNotifications()">🔔 الإشعارات</button>
                         <span class="notification-badge" id="notificationCount">3</span>
                     </div>
-                    <div class="user-info" id="userInfo" style="display:none">
-                        👤 مرحباً، <span id="userName"></span>
-                    </div>
-                    <div class="cart-icon" onclick="viewCart()">
-                        🛒 سلة ( <span id="cartCount">0</span> )
-                    </div>
-                </div>
-            </div>
-        </div>
-    </header>
+ <div class="user-info" id="userInfo" style="display:none">
+    👤 مرحباً، <span id="userName"></span>
+    <button onclick="logout()" class="logout-btn">🚪 تسجيل خروج</button>
+</div>
 
-    <!-- ADVANCED SEARCH -->
-    <section class="advanced-search container" aria-label="بحث">
-        <div>
-            <input id="globalSearch" onkeyup="advancedSearch()" placeholder="🔍 ابحث عن المنتجات..." style="width:100%;padding:10px;border-radius:8px;border:2px solid #e9ecef">
-            <div class="search-filters">
-                <select id="categoryFilter" onchange="advancedSearch()">
-                    <option value="">جميع الفئات</option>
-                    <option value="ملابس">ملابس</option>
-                    <option value="إلكترونيات">إلكترونيات</option>
-                    <option value="أكسسوارات">أكسسوارات</option>
-                </select>
-                <select id="priceRangeFilter" onchange="advancedSearch()">
-                    <option value="">جميع الأسعار</option>
-                    <option value="0-50">حتى 50$</option>
-                    <option value="50-100">50$ - 100$</option>
-                    <option value="100-999">أكثر من 100$</option>
+<style>
+.logout-btn {
+    background: linear-gradient(135deg, #dc3545, #c82333);
+    color: white;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    margin-right: 10px;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 8px rgba(220, 53, 69, 0.3);
+    font-family: 'Cairo', sans-serif;
+}
+
+.logout-btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 12px rgba(220, 53, 69, 0.4);
+    background: linear-gradient(135deg, #c82333, #a71e2a);
+}
+</style>
                 </select>
                 <select id="sortBy" onchange="advancedSearch()">
                     <option value="default">الترتيب الافتراضي</option>
