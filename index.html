@@ -1294,121 +1294,157 @@
 
     <!-- Font Awesome for Icons -->
     <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
-    <script type="module">
-  // ----------------- Firebase (مفعل) -----------------
-  try {
-    if (!window.__firebaseInitialized) {
-      import("https://www.gstatic.com/firebasejs/12.5.0/firebase-app.js").then(({ initializeApp }) => {
-        return Promise.all([
-          Promise.resolve(initializeApp),
-          import("https://www.gstatic.com/firebasejs/12.5.0/firebase-analytics.js")
-        ]);
-      }).then(([initializeApp, analyticsModule]) => {
-        const firebaseConfig = {
-          apiKey: "AIzaSyCND4k2bj3KAS_kWOH8KOdydzd2WSl2CjY",
-          authDomain: "jamil-al-hattami-company.firebaseapp.com",
-          projectId: "jamil-al-hattami-company",
-          storageBucket: "jamil-al-hattami-company.firebasestorage.app",
-          messagingSenderId: "645526786969",
-          appId: "1:645526786969:web:325b9fb924100610113908",
-          measurementId: "G-QVD67KZL3T"
-        };
+ <!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>شركة جميل الحطامي تسويق و مبيعات للتسوق الإلكتروني</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <meta name="description" content="شركة جميل الحطامي - تسوق إلكتروني آمن مع أفضل العروض على الملابس، الإلكترونيات، والإكسسوارات">
+    <meta name="keywords" content="تسوق إلكتروني, ملابس, إلكترونيات, اكسسوارات, عروض, تخفيضات">
+    <meta name="author" content="شركة جميل الحطامي تسويق و مبيعات للتسوق الإلكتروني">
+    <style>
+        :root {--primary:#007bff;--secondary:#28a745;--accent:#ff6b6b;--text:#333;--light-bg:#f8f9fa;--white:#fff;--shadow:0 4px 15px rgba(0,0,0,0.08);}
+        *{box-sizing:border-box;}
+        body{font-family:'Cairo',sans-serif;background:var(--light-bg);color:var(--text);line-height:1.6;margin:0;padding:0;direction:rtl;}
+        .container{max-width:1400px;margin:0 auto;padding:0 16px;}
+        .header{background:linear-gradient(135deg,var(--primary),#0056b3);color:var(--white);padding:18px 0;box-shadow:var(--shadow);}
+        .header .nav{display:flex;justify-content:space-between;align-items:center;}
+        .header .nav a{color:#fff;margin:0 8px;text-decoration:none;font-weight:600;}
+        .product-card{background:#fff;padding:12px;border-radius:8px;box-shadow:var(--shadow);margin:12px;display:inline-block;width:calc(25% - 24px);vertical-align:top;text-align:center;}
+        .product-card img{max-width:100%;border-radius:6px;}
+        .product-card h3{margin:8px 0;font-size:16px;}
+        .product-card .price{color:var(--secondary);font-weight:600;}
+        .btn-cart,.btn-whatsapp{margin:4px;padding:6px 12px;border:none;border-radius:4px;cursor:pointer;}
+        .btn-cart{background:var(--primary);color:#fff;}
+        .btn-whatsapp{background:#25D366;color:#fff;}
+        .best-seller-badge{background:#ff6b6b;color:#fff;padding:4px 6px;border-radius:4px;font-size:12px;margin-bottom:4px;display:inline-block;}
+        .cart-count{background:var(--accent);color:#fff;border-radius:50%;padding:2px 6px;margin-left:4px;font-weight:bold;}
+        footer{background:#333;color:#fff;padding:16px;text-align:center;margin-top:24px;}
+        footer a{color:#fff;text-decoration:none;margin:0 6px;}
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="container nav">
+            <div class="logo">شركة جميل الحطامي</div>
+            <div class="nav-links">
+                <a href="#" onclick="filterCategory('all')">الكل</a>
+                <a href="#" onclick="filterCategory('ملابس')">ملابس</a>
+                <a href="#" onclick="filterCategory('إلكترونيات')">إلكترونيات</a>
+                <a href="#" onclick="filterCategory('أكسسوارات')">أكسسوارات</a>
+            </div>
+            <div class="cart-icon">
+                🛒 السلة <span class="cart-count">0</span>
+            </div>
+        </div>
+    </header>
 
-        const app = initializeApp(firebaseConfig);
-        try {
-          const analytics = analyticsModule.getAnalytics(app);
-          console.log("Firebase Analytics مفعّل.");
-        } catch (e) {
-          console.log("Firebase مفعّل (بدون Analytics أو تم تعطيله):", e?.message || "");
+    <div class="container">
+        <div id="productsContainer" class="products"></div>
+    </div>
+
+    <footer>
+        شركة جميل الحطامي تسويق و مبيعات للتسوق الإلكتروني
+        <br>📧 2gmil991@gmail.com | 📱 <a href="https://wa.me/967737906480" target="_blank">واتساب</a>
+        <br>
+        تابعنا: 
+        <a href="#" target="_blank">فيسبوك</a> • 
+        <a href="#" target="_blank">تيك توك</a> • 
+        <a href="#" target="_blank">إنستجرام</a>
+    </footer>
+
+    <!-- >>> ضع هذا الكود بعد السطر 1296 (قبل </body>) >>> -->
+    <script type="module">
+      // ----------------- Firebase (مفعل) -----------------
+      try {
+        if (!window.__firebaseInitialized) {
+          import("https://www.gstatic.com/firebasejs/12.5.0/firebase-app.js").then(({ initializeApp }) => {
+            return Promise.all([
+              Promise.resolve(initializeApp),
+              import("https://www.gstatic.com/firebasejs/12.5.0/firebase-analytics.js")
+            ]);
+          }).then(([initializeApp, analyticsModule]) => {
+            const firebaseConfig = {
+              apiKey: "AIzaSyCND4k2bj3KAS_kWOH8KOdydzd2WSl2CjY",
+              authDomain: "jamil-al-hattami-company.firebaseapp.com",
+              projectId: "jamil-al-hattami-company",
+              storageBucket: "jamil-al-hattami-company.firebasestorage.app",
+              messagingSenderId: "645526786969",
+              appId: "1:645526786969:web:325b9fb924100610113908",
+              measurementId: "G-QVD67KZL3T"
+            };
+            const app = initializeApp(firebaseConfig);
+            try { const analytics = analyticsModule.getAnalytics(app); console.log("Firebase Analytics مفعّل."); } 
+            catch (e) { console.log("Firebase مفعّل (بدون Analytics أو تم تعطيله):", e?.message || ""); }
+            window.__firebaseInitialized = true;
+            console.log("Firebase مهيأ ✅");
+          }).catch(err => console.error("خطأ تهيئة Firebase:", err));
+        } else { console.log("Firebase مُهيأ مسبقًا، تجاوز التهيئة."); }
+      } catch (err) { console.error("خطأ عند تحميل Firebase بشكل ديناميكي:", err); }
+
+      // ----------------- وظائف الموقع -----------------
+      (function exposeHelpers() {
+        if (typeof window.updateCartCount !== "function") {
+          window.updateCartCount = function () {
+            try {
+              const count = (window.cart && Array.isArray(window.cart)) ? window.cart.length : 0;
+              const el = document.querySelector('.cart-count') || document.querySelector('[data-cart-count]');
+              if (el) el.textContent = count;
+            } catch (e) { console.warn("updateCartCount error:", e); }
+          };
         }
 
-        window.__firebaseInitialized = true;
-        console.log("Firebase مهيأ ✅");
-      }).catch(err => {
-        console.error("خطأ تهيئة Firebase:", err);
-      });
-    } else {
-      console.log("Firebase مُهيأ مسبقًا، تجاوز التهيئة.");
-    }
-  } catch (err) {
-    console.error("خطأ عند تحميل Firebase بشكل ديناميكي:", err);
-  }
+        if (typeof window.displayProducts !== "function") {
+          window.displayProducts = function(list) {
+            try {
+              const container = document.getElementById('productsContainer') || document.querySelector('[data-products-container]') || document.querySelector('.products');
+              if (!container) return;
+              container.innerHTML = '';
+              (list || window.products || []).forEach((p, i) => {
+                const card = document.createElement('div');
+                card.className = 'product-card';
+                card.innerHTML = `
+                  ${p.bestSeller ? '<div class="best-seller-badge">🔥 الأكثر طلباً</div>' : ''}
+                  <img src="${p.image}" alt="${p.name}" loading="lazy">
+                  <h3>${p.name}</h3>
+                  <div class="price">${p.price}$</div>
+                  <div class="brand">${p.brand}</div>
+                  <p style="color:#666;font-size:14px;margin:8px 0">${p.description}</p>
+                  <button class="btn-cart" onclick="addToCart(${i})">🛒 إضافة للسلة</button>
+                  <button class="btn-whatsapp" onclick="window.open('https://wa.me/967737906480?text=اهلا+اريد+طلب+${encodeURIComponent(p.name)}','_blank')">💬 واتساب</button>
+                  <button class="btn-cart" onclick="removeFromCart(${i})" style="background:#dc3545;color:#fff;">🗑️ حذف من السلة</button>
+                `;
+                container.appendChild(card);
+              });
+            } catch(e) { console.warn("displayProducts error:", e); }
+          };
+        }
 
-  // ----------------- وظائف الموقع -----------------
-  (function() {
-    // تحديث عدد المنتجات في السلة
-    if (typeof window.updateCartCount !== "function") {
-      window.updateCartCount = function () {
-        try {
-          const count = (window.cart && Array.isArray(window.cart)) ? window.cart.length : 0;
-          const el = document.querySelector('.cart-count') || document.querySelector('[data-cart-count]');
-          if (el) el.textContent = count;
-        } catch (e) { console.warn("updateCartCount error:", e); }
-      };
-    }
+        if (typeof window.filterCategory !== "function") {
+          window.filterCategory = function(category) {
+            try {
+              if (!category || category==='all') { window.displayProducts(window.products||[]); return; }
+              const filtered = (window.products||[]).filter(p => (p.category||'').toLowerCase() === category.toLowerCase());
+              window.displayProducts(filtered);
+            } catch(e) { console.warn("filterCategory error:", e); }
+          };
+        }
 
-    // عرض المنتجات
-    if (typeof window.displayProducts !== "function") {
-      window.displayProducts = function (list) {
-        try {
-          const container = document.getElementById('productsContainer') || document.querySelector('[data-products-container]') || document.querySelector('.products');
-          if (!container) return;
-          container.innerHTML = '';
-          (list || window.products || []).forEach((p, i) => {
-            const card = document.createElement('div');
-            card.className = 'product-card';
-            card.innerHTML = `
-              ${p.bestSeller ? '<div class="best-seller-badge">🔥 الأكثر طلباً</div>' : ''}
-              <img src="${p.image}" alt="${p.name || ''}" loading="lazy">
-              <h3>${p.name}</h3>
-              <div class="price">${p.price}$</div>
-              <div class="brand">${p.brand}</div>
-              <p style="color:#666;font-size:14px;margin:8px 0">${p.description}</p>
-              <button class="btn-cart" onclick="addToCart(${i})">🛒 إضافة للسلة</button>
-              <button class="btn-whatsapp" onclick="window.open('https://wa.me/967737906480?text=اهلا+اريد+طلب+${encodeURIComponent(p.name)}','_blank')">💬 واتساب</button>
-              <button class="btn-cart" onclick="removeFromCart(${i})" style="background:#dc3545;color:#fff;">🗑️ حذف من السلة</button>
-            `;
-            container.appendChild(card);
-          });
-        } catch(e) { console.warn("displayProducts error:", e); }
-      };
-    }
+        if (typeof window.scrollToOffers !== "function") {
+          window.scrollToOffers = function() {
+            try { const offers = document.getElementById('offers') || document.querySelector('[data-offers]'); if(offers) offers.scrollIntoView({behavior:'smooth'}); }
+            catch(e){ console.warn("scrollToOffers error:", e); }
+          };
+        }
 
-    // الفلترة حسب الفئة
-    if (typeof window.filterCategory !== "function") {
-      window.filterCategory = function(category) {
-        try {
-          if (!category || category === 'all') {
-            window.displayProducts(window.products || []);
-            return;
-          }
-          const filtered = (window.products || []).filter(p => (p.category || '').toLowerCase() === (category || '').toLowerCase());
-          window.displayProducts(filtered);
-        } catch(e) { console.warn("filterCategory error:", e); }
-      };
-    }
+        try { setTimeout(() => { window.updateCartCount && window.updateCartCount(); }, 300); } catch(e){}
+      })();
 
-    // التمرير لعروض الصفحة
-    if (typeof window.scrollToOffers !== "function") {
-      window.scrollToOffers = function() {
-        try {
-          const offers = document.getElementById('offers') || document.querySelector('[data-offers]');
-          if (offers) offers.scrollIntoView({ behavior: 'smooth' });
-        } catch(e) { console.warn("scrollToOffers error:", e); }
-      };
-    }
-
-    // تحديث السلة مباشرة عند التحميل
-    try { setTimeout(() => { window.updateCartCount && window.updateCartCount(); }, 300); } catch(e) {}
-  })();
-
-  // تنبيه بروتوكول HTTPS
-  try {
-    if (location.protocol !== "https:" && location.hostname !== "localhost") {
-      console.warn("انتباه: الموقع يعمل عبر بروتوكول غير مؤمن (HTTP). يفضّل استخدام HTTPS.");
-    }
-  } catch(e) {}
-
-  console.log("سكربت Firebase ووظائف الموقع جاهزة ✅");
-</script>
-<!-- >>> نهاية النسخة الكاملة <<< -->
+      try { if(location.protocol!=="https:" && location.hostname!=="localhost") console.warn("انتباه: الموقع يعمل عبر بروتوكول غير مؤمن (HTTP). يفضّل استخدام HTTPS."); } catch(e) {}
+      console.log("سكربت Firebase ووظائف المساعدة جاهزة للنسخ والصق ✅");
+    </script>
+    <!-- >>> نهاية النسخة الكاملة >>> -->
+</body>
+</html>
