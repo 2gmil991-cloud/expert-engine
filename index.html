@@ -1294,9 +1294,8 @@
 
     <!-- Font Awesome for Icons -->
     <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
-<!-- >>> النسخة المجمعة الكاملة بعد السطر 1296 وقبل 1297 >>> -->
-<script type="module">
-  // ----------------- Firebase (مفعّل) -----------------
+    <script type="module">
+  // ----------------- Firebase (مفعل) -----------------
   try {
     if (!window.__firebaseInitialized) {
       import("https://www.gstatic.com/firebasejs/12.5.0/firebase-app.js").then(({ initializeApp }) => {
@@ -1335,9 +1334,9 @@
     console.error("خطأ عند تحميل Firebase بشكل ديناميكي:", err);
   }
 
-  // ----------------- وظائف الموقع المجمعة -----------------
-  (function exposeHelpers() {
-    // updateCartCount
+  // ----------------- وظائف الموقع -----------------
+  (function() {
+    // تحديث عدد المنتجات في السلة
     if (typeof window.updateCartCount !== "function") {
       window.updateCartCount = function () {
         try {
@@ -1348,39 +1347,36 @@
       };
     }
 
-    // displayProducts
+    // عرض المنتجات
     if (typeof window.displayProducts !== "function") {
       window.displayProducts = function (list) {
         try {
           const container = document.getElementById('productsContainer') || document.querySelector('[data-products-container]') || document.querySelector('.products');
           if (!container) return;
           container.innerHTML = '';
-          (list || window.products || []).forEach((product, idx) => {
+          (list || window.products || []).forEach((p, i) => {
             const card = document.createElement('div');
-            card.className = 'بطاقة المنتج';
-            const price = (product && product.price != null) ? product.price : '';
-            const img = product && product.image ? product.image : '';
+            card.className = 'product-card';
             card.innerHTML = `
-              ${product?.bestSeller ? '<div class="best-seller-badge">🔥الطلب الاكثر طلباً</div>' : ''}
-              <img src="${img}" alt="${product?.name || ''}" loading="lazy" onclick="showImage && showImage('${img}')">
-              <h3>${product?.name || ''}</h3>
-              <div class="price">${price ? price + '$' : ''}</div>
-              <div class="brand">${product?.brand || ''}</div>
-              <p style="color:#666;font-size:14px;margin:8px 0">${product?.description || ''}</p>
-              <div class="product-actions">
-                <button class="btn btn-primary" onclick="addToCart && addToCart(${idx})">🛒 إضافة للسلة</button>
-                <button class="btn btn-whatsapp" onclick="contactWhatsApp && contactWhatsApp('${product?.name||''}', ${price || 0})">💬 واتساب</button>
-              </div>
+              ${p.bestSeller ? '<div class="best-seller-badge">🔥 الأكثر طلباً</div>' : ''}
+              <img src="${p.image}" alt="${p.name || ''}" loading="lazy">
+              <h3>${p.name}</h3>
+              <div class="price">${p.price}$</div>
+              <div class="brand">${p.brand}</div>
+              <p style="color:#666;font-size:14px;margin:8px 0">${p.description}</p>
+              <button class="btn-cart" onclick="addToCart(${i})">🛒 إضافة للسلة</button>
+              <button class="btn-whatsapp" onclick="window.open('https://wa.me/967737906480?text=اهلا+اريد+طلب+${encodeURIComponent(p.name)}','_blank')">💬 واتساب</button>
+              <button class="btn-cart" onclick="removeFromCart(${i})" style="background:#dc3545;color:#fff;">🗑️ حذف من السلة</button>
             `;
             container.appendChild(card);
           });
-        } catch (e) { console.warn("displayProducts error:", e); }
+        } catch(e) { console.warn("displayProducts error:", e); }
       };
     }
 
-    // filterCategory
+    // الفلترة حسب الفئة
     if (typeof window.filterCategory !== "function") {
-      window.filterCategory = function (category) {
+      window.filterCategory = function(category) {
         try {
           if (!category || category === 'all') {
             window.displayProducts(window.products || []);
@@ -1388,33 +1384,31 @@
           }
           const filtered = (window.products || []).filter(p => (p.category || '').toLowerCase() === (category || '').toLowerCase());
           window.displayProducts(filtered);
-        } catch (e) { console.warn("filterCategory error:", e); }
+        } catch(e) { console.warn("filterCategory error:", e); }
       };
     }
 
-    // scrollToOffers
+    // التمرير لعروض الصفحة
     if (typeof window.scrollToOffers !== "function") {
-      window.scrollToOffers = function () {
+      window.scrollToOffers = function() {
         try {
           const offers = document.getElementById('offers') || document.querySelector('[data-offers]');
           if (offers) offers.scrollIntoView({ behavior: 'smooth' });
-        } catch (e) { console.warn("scrollToOffers error:", e); }
+        } catch(e) { console.warn("scrollToOffers error:", e); }
       };
     }
 
-    // تحديث السلة عند التحميل
-    try { setTimeout(() => { window.updateCartCount && window.updateCartCount(); }, 300); } catch (e) {}
+    // تحديث السلة مباشرة عند التحميل
+    try { setTimeout(() => { window.updateCartCount && window.updateCartCount(); }, 300); } catch(e) {}
   })();
 
-  // تحقق البروتوكول
+  // تنبيه بروتوكول HTTPS
   try {
     if (location.protocol !== "https:" && location.hostname !== "localhost") {
-      console.warn("انتباه: الموقع يعمل عبر بروتوكول غير مؤمن (HTTP). يفضّل استخدام HTTPS في الإنتاج.");
+      console.warn("انتباه: الموقع يعمل عبر بروتوكول غير مؤمن (HTTP). يفضّل استخدام HTTPS.");
     }
-  } catch (e) {}
+  } catch(e) {}
 
-  console.log("نسخة Firebase ووظائف الموقع المجمعة جاهزة للنسخ والصق ✅");
+  console.log("سكربت Firebase ووظائف الموقع جاهزة ✅");
 </script>
-<!-- >>> نهاية النسخة المجمعة الكاملة >>> -->
-        </body>
-</html>
+<!-- >>> نهاية النسخة الكاملة <<< -->
