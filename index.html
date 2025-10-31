@@ -1294,5 +1294,127 @@
 
     <!-- Font Awesome for Icons -->
     <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
-</body>
+<!-- >>> النسخة المجمعة الكاملة بعد السطر 1296 وقبل 1297 >>> -->
+<script type="module">
+  // ----------------- Firebase (مفعّل) -----------------
+  try {
+    if (!window.__firebaseInitialized) {
+      import("https://www.gstatic.com/firebasejs/12.5.0/firebase-app.js").then(({ initializeApp }) => {
+        return Promise.all([
+          Promise.resolve(initializeApp),
+          import("https://www.gstatic.com/firebasejs/12.5.0/firebase-analytics.js")
+        ]);
+      }).then(([initializeApp, analyticsModule]) => {
+        const firebaseConfig = {
+          apiKey: "AIzaSyCND4k2bj3KAS_kWOH8KOdydzd2WSl2CjY",
+          authDomain: "jamil-al-hattami-company.firebaseapp.com",
+          projectId: "jamil-al-hattami-company",
+          storageBucket: "jamil-al-hattami-company.firebasestorage.app",
+          messagingSenderId: "645526786969",
+          appId: "1:645526786969:web:325b9fb924100610113908",
+          measurementId: "G-QVD67KZL3T"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        try {
+          const analytics = analyticsModule.getAnalytics(app);
+          console.log("Firebase Analytics مفعّل.");
+        } catch (e) {
+          console.log("Firebase مفعّل (بدون Analytics أو تم تعطيله):", e?.message || "");
+        }
+
+        window.__firebaseInitialized = true;
+        console.log("Firebase مهيأ ✅");
+      }).catch(err => {
+        console.error("خطأ تهيئة Firebase:", err);
+      });
+    } else {
+      console.log("Firebase مُهيأ مسبقًا، تجاوز التهيئة.");
+    }
+  } catch (err) {
+    console.error("خطأ عند تحميل Firebase بشكل ديناميكي:", err);
+  }
+
+  // ----------------- وظائف الموقع المجمعة -----------------
+  (function exposeHelpers() {
+    // updateCartCount
+    if (typeof window.updateCartCount !== "function") {
+      window.updateCartCount = function () {
+        try {
+          const count = (window.cart && Array.isArray(window.cart)) ? window.cart.length : 0;
+          const el = document.querySelector('.cart-count') || document.querySelector('[data-cart-count]');
+          if (el) el.textContent = count;
+        } catch (e) { console.warn("updateCartCount error:", e); }
+      };
+    }
+
+    // displayProducts
+    if (typeof window.displayProducts !== "function") {
+      window.displayProducts = function (list) {
+        try {
+          const container = document.getElementById('productsContainer') || document.querySelector('[data-products-container]') || document.querySelector('.products');
+          if (!container) return;
+          container.innerHTML = '';
+          (list || window.products || []).forEach((product, idx) => {
+            const card = document.createElement('div');
+            card.className = 'بطاقة المنتج';
+            const price = (product && product.price != null) ? product.price : '';
+            const img = product && product.image ? product.image : '';
+            card.innerHTML = `
+              ${product?.bestSeller ? '<div class="best-seller-badge">🔥الطلب الاكثر طلباً</div>' : ''}
+              <img src="${img}" alt="${product?.name || ''}" loading="lazy" onclick="showImage && showImage('${img}')">
+              <h3>${product?.name || ''}</h3>
+              <div class="price">${price ? price + '$' : ''}</div>
+              <div class="brand">${product?.brand || ''}</div>
+              <p style="color:#666;font-size:14px;margin:8px 0">${product?.description || ''}</p>
+              <div class="product-actions">
+                <button class="btn btn-primary" onclick="addToCart && addToCart(${idx})">🛒 إضافة للسلة</button>
+                <button class="btn btn-whatsapp" onclick="contactWhatsApp && contactWhatsApp('${product?.name||''}', ${price || 0})">💬 واتساب</button>
+              </div>
+            `;
+            container.appendChild(card);
+          });
+        } catch (e) { console.warn("displayProducts error:", e); }
+      };
+    }
+
+    // filterCategory
+    if (typeof window.filterCategory !== "function") {
+      window.filterCategory = function (category) {
+        try {
+          if (!category || category === 'all') {
+            window.displayProducts(window.products || []);
+            return;
+          }
+          const filtered = (window.products || []).filter(p => (p.category || '').toLowerCase() === (category || '').toLowerCase());
+          window.displayProducts(filtered);
+        } catch (e) { console.warn("filterCategory error:", e); }
+      };
+    }
+
+    // scrollToOffers
+    if (typeof window.scrollToOffers !== "function") {
+      window.scrollToOffers = function () {
+        try {
+          const offers = document.getElementById('offers') || document.querySelector('[data-offers]');
+          if (offers) offers.scrollIntoView({ behavior: 'smooth' });
+        } catch (e) { console.warn("scrollToOffers error:", e); }
+      };
+    }
+
+    // تحديث السلة عند التحميل
+    try { setTimeout(() => { window.updateCartCount && window.updateCartCount(); }, 300); } catch (e) {}
+  })();
+
+  // تحقق البروتوكول
+  try {
+    if (location.protocol !== "https:" && location.hostname !== "localhost") {
+      console.warn("انتباه: الموقع يعمل عبر بروتوكول غير مؤمن (HTTP). يفضّل استخدام HTTPS في الإنتاج.");
+    }
+  } catch (e) {}
+
+  console.log("نسخة Firebase ووظائف الموقع المجمعة جاهزة للنسخ والصق ✅");
+</script>
+<!-- >>> نهاية النسخة المجمعة الكاملة >>> -->
+        </body>
 </html>
