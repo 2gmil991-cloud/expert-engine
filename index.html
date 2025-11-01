@@ -1,40 +1,990 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>شركة جميل الحطامي تسويق و مبيعات للتسوق الإلكتروني</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700&display=swap" rel="stylesheet">
-    <meta name="description" content="شركة جميل الحطامي - تسوق إلكتروني آمن مع أفضل العروض على الملابس، الإلكترونيات، والإكسسوارات">
-    <meta name="keywords" content="تسوق إلكتروني, ملابس, إلكترونيات, اكسسوارات, عروض, تخفيضات">
-    <meta name="author" content="شركة جميل الحطامي تسويق و مبيعات للتسوق الإلكتروني">
-    
-    <!-- Structured data for SEO -->
-    <script type="application/ld+json">
-    {
-        "@context":"https://schema.org",
-        "@type":"Store",
-        "name":"شركة جميل الحطامي تسويق و مبيعات للتسوق الإلكتروني",
-        "url":"https://jameel-store.com",
-        "telephone":"+967737906480",
-        "email":"2gmil991@gmail.com",
-        "description":"متجر إلكتروني متخصص في بيع الملابس، الإلكترونيات، والإكسسوارات"
-    }
-    </script>
-    
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>شركة جميل الحطامي تسويق و مبيعات للتسوق الاكتروني</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
-            --primary: #007bff;
-            --secondary: #28a745;
-            --accent: #ff6b6b;
-            --text: #333;
-            --light-bg: #f8f9fa;
-            --white: #fff;
-            --shadow: 0 4px 15px rgba(0,0,0,0.08);
+            --primary: #004aad;
+            --secondary: #f59e0b;
+            --dark: #1e293b;
+            --light: #f8fafc;
+            --purple: #8B5FBF; /* اللون البنفسجي المطلوب */
+            --whatsapp: #25D366;
+            --facebook: #1877F2;
+            --tiktok: #000000;
+            --email: #EA4335;
         }
         
         * {
+            margin: 0;
+            padding: 0;
             box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: var(--light);
+            color: var(--dark);
+            line-height: 1.6;
+        }
+
+        /* التصميم العام */
+        header {
+            background: linear-gradient(135deg, var(--purple), #6A4C9C); /* خلفية بنفسجية */
+            color: white;
+            padding: 1rem;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* تأثير زخرفي للرأس */
+        header::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%239C76D2' fill-opacity='0.1' fill-rule='evenodd'/%3E%3C/svg%3E");
+            opacity: 0.3;
+            z-index: 0;
+        }
+
+        .header-content {
+            position: relative;
+            z-index: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .header-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            margin-bottom: 1rem;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .header-info {
+            display: flex;
+            gap: 1rem;
+            font-size: 0.9rem;
+        }
+
+        nav {
+            display: flex;
+            justify-content: center;
+            gap: 0.5rem;
+            width: 100%;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(5px);
+            white-space: nowrap;
+        }
+
+        nav a:hover {
+            background: rgba(255,255,255,0.3);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+
+        main {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        section {
+            background: white;
+            margin: 2rem 0;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        section:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+        }
+
+        /* المنتجات */
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 1rem;
+        }
+
+        .product {
+            border: 1px solid #e2e8f0;
+            border-radius: 10px;
+            padding: 1rem;
+            text-align: center;
+            transition: all 0.3s ease;
+            background: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .product::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--purple), #6A4C9C);
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+
+        .product:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 12px 30px rgba(0,0,0,0.15);
+        }
+
+        .product:hover::before {
+            transform: scaleX(1);
+        }
+
+        .product img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 5px;
+            margin-bottom: 1rem;
+            transition: transform 0.3s ease;
+        }
+
+        .product:hover img {
+            transform: scale(1.05);
+        }
+
+        /* الأزرار */
+        .btn {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            margin: 0.25rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn:hover {
+            background: #2563eb;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+
+        .btn-whatsapp {
+            background: var(--whatsapp);
+        }
+
+        .btn-whatsapp:hover {
+            background: #128C7E;
+        }
+
+        .btn-facebook {
+            background: var(--facebook);
+        }
+
+        .btn-facebook:hover {
+            background: #0e5db7;
+        }
+
+        .btn-tiktok {
+            background: var(--tiktok);
+        }
+
+        .btn-tiktok:hover {
+            background: #333333;
+        }
+
+        .btn-email {
+            background: var(--email);
+        }
+
+        .btn-email:hover {
+            background: #c23321;
+        }
+
+        /* التنبيهات */
+        .alert {
+            background: #fffae6;
+            border: 1px solid #ffcc00;
+            padding: 1rem;
+            border-radius: 5px;
+            margin-bottom: 1rem;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .alert:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+        /* لوحة التحكم */
+        .admin-panel {
+            background: var(--dark);
+            color: white;
+            padding: 1rem;
+            border-radius: 10px;
+            margin-bottom: 2rem;
+            transition: all 0.3s ease;
+        }
+
+        .admin-panel:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.2);
+        }
+
+        .admin-form {
+            display: grid;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .admin-form input, .admin-form textarea {
+            padding: 0.5rem;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .admin-form input:focus, .admin-form textarea:focus {
+            outline: none;
+            border-color: var(--purple);
+            box-shadow: 0 0 0 3px rgba(139, 95, 191, 0.2);
+            transform: translateY(-1px);
+        }
+
+        /* العروض */
+        .offers-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .offer-template {
+            background: linear-gradient(135deg, var(--purple), #6A4C9C);
+            color: white;
+            padding: 2rem;
+            border-radius: 10px;
+            text-align: center;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .offer-template::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: rgba(255,255,255,0.1);
+            transform: rotate(45deg);
+            transition: all 0.5s ease;
+            opacity: 0;
+        }
+
+        .offer-template:hover {
+            transform: translateY(-8px) scale(1.03);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.3);
+        }
+
+        .offer-template:hover::before {
+            opacity: 1;
+            transform: rotate(45deg) translate(10%, 10%);
+        }
+
+        .countdown {
+            font-size: 2rem;
+            font-weight: bold;
+            margin: 1rem 0;
+            transition: all 0.3s ease;
+        }
+
+        .offer-template:hover .countdown {
+            transform: scale(1.1);
+        }
+
+        /* التحليلات */
+        .analytics {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .analytics-card {
+            background: var(--purple); /* استخدام اللون البنفسجي */
+            color: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            text-align: center;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .analytics-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(255,255,255,0.1), transparent);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .analytics-card:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+        }
+
+        .analytics-card:hover::before {
+            opacity: 1;
+        }
+
+        /* سلة المحذوفات */
+        .trash-section {
+            background: #f8f9fa;
+            border: 2px dashed #dc3545;
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin-top: 2rem;
+            transition: all 0.3s ease;
+        }
+
+        .trash-section:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+        }
+
+        .trash-item {
+            background: white;
+            border: 1px solid #e9ecef;
+            border-radius: 8px;
+            padding: 1rem;
+            margin-bottom: 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+
+        .trash-item:hover {
+            transform: translateX(-5px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        .trash-info {
+            flex: 1;
+        }
+
+        .trash-actions {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .days-left {
+            font-size: 0.8rem;
+            color: #6c757d;
+            margin-top: 0.25rem;
+        }
+
+        /* التذييل */
+        footer {
+            background: var(--dark);
+            color: white;
+            text-align: center;
+            padding: 2rem;
+            margin-top: 3rem;
+            transition: all 0.3s ease;
+        }
+
+        footer:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 -5px 15px rgba(0,0,0,0.2);
+        }
+
+        /* التجاوب */
+        @media (max-width: 768px) {
+            .header-top {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            .header-info {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            nav {
+                flex-wrap: wrap;
+            }
+            
+            .products-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .trash-item {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 1rem;
+            }
+            
+            .trash-actions {
+                width: 100%;
+                justify-content: flex-end;
+            }
+            
+            main {
+                padding: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <div class="header-top">
+                <div class="logo">✨ شركة جميل الحطامي تسويق و مبيعات للتسوق الاكتروني ✨</div>
+                <div class="header-info">
+                    <span><i class="fas fa-phone"></i> 967737906480</span>
+                    <span><i class="fas fa-envelope"></i> 2gmil991@gmail.com</span>
+                </div>
+            </div>
+            <nav>
+                <a href="#home"><i class="fas fa-home"></i> الرئيسية</a>
+                <a href="#products"><i class="fas fa-shopping-bag"></i> المنتجات</a>
+                <a href="#offers"><i class="fas fa-tag"></i> العروض</a>
+                <a href="#admin"><i class="fas fa-cogs"></i> لوحة التحكم</a>
+                <a href="#trash"><i class="fas fa-trash"></i> سلة المحذوفات</a>
+                <a href="#contact"><i class="fas fa-phone-alt"></i> اتصل بنا</a>
+                <a href="#about"><i class="fas fa-info-circle"></i> من نحن</a>
+                <a href="#payment"><i class="fas fa-shipping-fast"></i> الدفع والشحن</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <!-- تنبيه الحماية -->
+        <div class="alert">
+            <span><i class="fas fa-shield-alt"></i></span>
+            <span>جميع الحقوق محفوظة لشركة جميل الحطامي تسويق و مبيعات للتسوق الاكتروني © 2025 - يحظر نسخ أو إعادة استخدام أي محتوى دون إذن مسبق</span>
+        </div>
+
+        <!-- الصفحة الرئيسية -->
+        <section id="home">
+            <h2><i class="fas fa-star"></i> مرحباً بكم في متجرنا الإلكتروني</h2>
+            <p>اكتشف أحدث المنتجات والعروض الحصرية مع خدمة عملاء على مدار الساعة</p>
+            
+            <div class="analytics">
+                <div class="analytics-card">
+                    <h3><i class="fas fa-users"></i> زوار اليوم</h3>
+                    <p id="visitorsCount">0</p>
+                </div>
+                <div class="analytics-card">
+                    <h3><i class="fas fa-shopping-bag"></i> المنتجات</h3>
+                    <p id="productsCount">0</p>
+                </div>
+                <div class="analytics-card">
+                    <h3><i class="fas fa-fire"></i> العروض النشطة</h3>
+                    <p id="activeOffers">0</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- قسم المنتجات -->
+        <section id="products">
+            <h2><i class="fas fa-shopping-bag"></i> منتجاتنا</h2>
+            <div class="products-grid" id="productsContainer">
+                <!-- المنتجات تضاف هنا عبر JavaScript -->
+            </div>
+        </section>
+
+        <!-- قسم العروض -->
+        <section id="offers">
+            <h2><i class="fas fa-tag"></i> العروض والقوالب</h2>
+            <div class="offers-grid">
+                <div class="offer-template">
+                    <h3><i class="fas fa-moon"></i> عرض رمضان</h3>
+                    <p>خصم 20% على جميع المنتجات</p>
+                    <div class="countdown" id="ramadanCountdown">07:00:00</div>
+                    <button class="btn" onclick="activateOffer('ramadan')"><i class="fas fa-bolt"></i> تفعيل العرض</button>
+                </div>
+                <div class="offer-template">
+                    <h3><i class="fas fa-shopping-cart"></i> عرض التصفية</h3>
+                    <p>خصم 30% على المنتجات المحددة</p>
+                    <div class="countdown" id="clearanceCountdown">05:00:00</div>
+                    <button class="btn" onclick="activateOffer('clearance')"><i class="fas fa-bolt"></i> تفعيل العرض</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- لوحة التحكم -->
+        <section id="admin">
+            <h2><i class="fas fa-cogs"></i> لوحة التحكم</h2>
+            <div class="admin-panel">
+                <h3><i class="fas fa-boxes"></i> إدارة المنتجات</h3>
+                <form class="admin-form" id="productForm">
+                    <input type="text" id="productName" placeholder="اسم المنتج" required>
+                    <input type="number" id="productPrice" placeholder="السعر" required>
+                    <textarea id="productDescription" placeholder="وصف المنتج" required></textarea>
+                    <input type="url" id="productImage" placeholder="رابط صورة المنتج" required>
+                    <button type="submit" class="btn"><i class="fas fa-plus"></i> إضافة منتج</button>
+                </form>
+                
+                <div style="margin-top: 2rem;">
+                    <h3><i class="fas fa-chart-bar"></i> التحليلات</h3>
+                    <div class="analytics">
+                        <div class="analytics-card">
+                            <h4><i class="fas fa-eye"></i> المشاهدات</h4>
+                            <p id="totalViews">0</p>
+                        </div>
+                        <div class="analytics-card">
+                            <h4><i class="fas fa-box-open"></i> المنتجات المضافة</h4>
+                            <p id="totalProducts">0</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- سلة المحذوفات -->
+        <section id="trash">
+            <h2><i class="fas fa-trash"></i> سلة المحذوفات</h2>
+            <div class="trash-section">
+                <p><i class="fas fa-info-circle"></i> هنا يتم تخزين العناصر المحذوفة. سيتم حذفها تلقائياً بعد 30 يوم.</p>
+                <div id="trashContainer">
+                    <!-- العناصر المحذوفة تظهر هنا -->
+                </div>
+            </div>
+        </section>
+
+        <!-- اتصل بنا -->
+        <section id="contact">
+            <h2><i class="fas fa-phone-alt"></i> اتصل بنا</h2>
+            <div style="display: flex; flex-wrap: wrap; gap: 1rem; justify-content: center;">
+                <a href="https://wa.me/967737906480" class="btn btn-whatsapp">
+                    <i class="fab fa-whatsapp"></i> واتساب: 967737906480
+                </a>
+                <a href="https://facebook.com/2gmil991" class="btn btn-facebook">
+                    <i class="fab fa-facebook"></i> فيسبوك
+                </a>
+                <a href="https://tiktok.com/@gmilgmilgmil99999" class="btn btn-tiktok">
+                    <i class="fab fa-tiktok"></i> تيك توك
+                </a>
+                <a href="mailto:2gmil991@gmail.com" class="btn btn-email">
+                    <i class="fas fa-envelope"></i> البريد الإلكتروني
+                </a>
+            </div>
+        </section>
+
+        <!-- من نحن -->
+        <section id="about">
+            <h2><i class="fas fa-info-circle"></i> من نحن</h2>
+            <p>شركة <strong>جميل الحطامي تسويق و مبيعات للتسوق الاكتروني</strong> منصة متكاملة تقدم حلول تسويق ومبيعات إلكترونية مبتكرة، نضمن لعملائنا أفضل تجربة تسوق مع خدمة دعم فني متكاملة.</p>
+        </section>
+
+        <!-- الدفع والشحن -->
+        <section id="payment">
+            <h2><i class="fas fa-shipping-fast"></i> طرق الدفع والشحن</h2>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem;">
+                <div>
+                    <h3><i class="fas fa-credit-card"></i> طرق الدفع:</h3>
+                    <p>• التحويل البنكي</p>
+                    <p>• الدفع عند الاستلام</p>
+                    <p>• باي بال</p>
+                </div>
+                <div>
+                    <h3><i class="fas fa-truck"></i> سياسة الشحن:</h3>
+                    <p>• الشحن متاح لجميع مناطق اليمن</p>
+                    <p>• توصيل سريع خلال 24-48 ساعة</p>
+                    <p>• متابعة الشحن عبر الواتساب</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p><i class="far fa-copyright"></i> 2025 جميع الحقوق محفوظة — شركة جميل الحطامي تسويق و مبيعات للتسوق الاكتروني</p>
+        <p style="margin-top: 1rem; font-size: 0.9rem;"><i class="fas fa-shield-alt"></i> محمي بقوانين حقوق الملكية الفكرية والعلامات التجارية</p>
+    </footer>
+
+    <script>
+        // نظام إدارة المنتجات وسلة المحذوفات
+        class StoreManager {
+            constructor() {
+                this.products = JSON.parse(localStorage.getItem('storeProducts')) || [];
+                this.trashItems = JSON.parse(localStorage.getItem('storeTrash')) || [];
+                this.analytics = JSON.parse(localStorage.getItem('storeAnalytics')) || {
+                    visitors: 0,
+                    views: 0,
+                    productsAdded: 0
+                };
+                this.init();
+            }
+
+            init() {
+                this.updateAnalytics();
+                this.displayProducts();
+                this.displayTrashItems();
+                this.setupEventListeners();
+                this.startCountdowns();
+                this.cleanOldTrashItems();
+            }
+
+            setupEventListeners() {
+                document.getElementById('productForm').addEventListener('submit', (e) => {
+                    e.preventDefault();
+                    this.addProduct();
+                });
+            }
+
+            addProduct() {
+                const product = {
+                    id: Date.now(),
+                    name: document.getElementById('productName').value,
+                    price: document.getElementById('productPrice').value,
+                    description: document.getElementById('productDescription').value,
+                    image: document.getElementById('productImage').value,
+                    createdAt: new Date().toISOString()
+                };
+
+                this.products.push(product);
+                this.saveProducts();
+                this.displayProducts();
+                this.updateAnalytics();
+                
+                // تفريغ النموذج
+                document.getElementById('productForm').reset();
+                
+                alert('✅ تم إضافة المنتج بنجاح!');
+            }
+
+            deleteProduct(id) {
+                const productIndex = this.products.findIndex(product => product.id === id);
+                if (productIndex !== -1) {
+                    const deletedProduct = this.products[productIndex];
+                    
+                    // إضافة المنتج إلى سلة المحذوفات
+                    this.trashItems.push({
+                        ...deletedProduct,
+                        deletedAt: new Date().toISOString(),
+                        deletedId: Date.now()
+                    });
+                    
+                    // حذف المنتج من القائمة الرئيسية
+                    this.products.splice(productIndex, 1);
+                    
+                    this.saveProducts();
+                    this.saveTrashItems();
+                    this.displayProducts();
+                    this.displayTrashItems();
+                    this.updateAnalytics();
+                    
+                    alert('🗑️ تم نقل المنتج إلى سلة المحذوفات');
+                }
+            }
+
+            restoreProduct(deletedId) {
+                const trashIndex = this.trashItems.findIndex(item => item.deletedId === deletedId);
+                if (trashIndex !== -1) {
+                    const restoredProduct = this.trashItems[trashIndex];
+                    
+                    // إزالة الخصائص المرتبطة بالمحذوفات
+                    const { deletedAt, deletedId, ...product } = restoredProduct;
+                    
+                    // إضافة المنتج إلى القائمة الرئيسية
+                    this.products.push(product);
+                    
+                    // حذفه من سلة المحذوفات
+                    this.trashItems.splice(trashIndex, 1);
+                    
+                    this.saveProducts();
+                    this.saveTrashItems();
+                    this.displayProducts();
+                    this.displayTrashItems();
+                    this.updateAnalytics();
+                    
+                    alert('✅ تم استعادة المنتج بنجاح!');
+                }
+            }
+
+            permanentDelete(deletedId) {
+                const trashIndex = this.trashItems.findIndex(item => item.deletedId === deletedId);
+                if (trashIndex !== -1) {
+                    this.trashItems.splice(trashIndex, 1);
+                    this.saveTrashItems();
+                    this.displayTrashItems();
+                    
+                    alert('🗑️ تم حذف المنتج نهائياً');
+                }
+            }
+
+            cleanOldTrashItems() {
+                const thirtyDaysAgo = new Date();
+                thirtyDaysAgo.setDate(thirtyDaysAgo.getDate() - 30);
+                
+                this.trashItems = this.trashItems.filter(item => {
+                    const deletedDate = new Date(item.deletedAt);
+                    return deletedDate > thirtyDaysAgo;
+                });
+                
+                this.saveTrashItems();
+                this.displayTrashItems();
+            }
+
+            displayProducts() {
+                const container = document.getElementById('productsContainer');
+                container.innerHTML = '';
+
+                this.products.forEach(product => {
+                    const productElement = document.createElement('div');
+                    productElement.className = 'product';
+                    productElement.innerHTML = `
+                        <img src="${product.image}" alt="${product.name}" onerror="this.src='https://via.placeholder.com/200x200?text=صورة+المنتج'">
+                        <h3>${product.name}</h3>
+                        <p>${product.description}</p>
+                        <p><strong>${product.price} ريال</strong></p>
+                        <button class="btn btn-whatsapp" onclick="window.open('https://wa.me/967737906480?text=أريد شراء المنتج: ${product.name} - السعر: ${product.price} ريال', '_blank')">
+                            <i class="fab fa-whatsapp"></i> شراء عبر واتساب
+                        </button>
+                        <button class="btn" onclick="storeManager.deleteProduct(${product.id})" style="background: #dc2626; margin-top: 0.5rem;">
+                            <i class="fas fa-trash"></i> حذف المنتج
+                        </button>
+                    `;
+                    container.appendChild(productElement);
+                });
+
+                document.getElementById('productsCount').textContent = this.products.length;
+                document.getElementById('totalProducts').textContent = this.products.length;
+            }
+
+            displayTrashItems() {
+                const container = document.getElementById('trashContainer');
+                container.innerHTML = '';
+
+                if (this.trashItems.length === 0) {
+                    container.innerHTML = '<p style="text-align: center; color: #6c757d;"><i class="fas fa-inbox"></i> سلة المحذوفات فارغة</p>';
+                    return;
+                }
+
+                this.trashItems.forEach(item => {
+                    const daysLeft = this.getDaysLeft(item.deletedAt);
+                    const trashElement = document.createElement('div');
+                    trashElement.className = 'trash-item';
+                    trashElement.innerHTML = `
+                        <div class="trash-info">
+                            <h4>${item.name}</h4>
+                            <p>${item.description}</p>
+                            <p><strong>${item.price} ريال</strong></p>
+                            <div class="days-left"><i class="far fa-clock"></i> متبقي ${daysLeft} يوم للحذف النهائي</div>
+                        </div>
+                        <div class="trash-actions">
+                            <button class="btn" onclick="storeManager.restoreProduct(${item.deletedId})" style="background: #10b981;">
+                                <i class="fas fa-undo"></i> استعادة
+                            </button>
+                            <button class="btn" onclick="storeManager.permanentDelete(${item.deletedId})" style="background: #dc2626;">
+                                <i class="fas fa-times"></i> حذف نهائي
+                            </button>
+                        </div>
+                    `;
+                    container.appendChild(trashElement);
+                });
+            }
+
+            getDaysLeft(deletedAt) {
+                const deletedDate = new Date(deletedAt);
+                const thirtyDaysLater = new Date(deletedDate);
+                thirtyDaysLater.setDate(thirtyDaysLater.getDate() + 30);
+                
+                const now = new Date();
+                const diffTime = thirtyDaysLater - now;
+                const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+                
+                return Math.max(0, diffDays);
+            }
+
+            updateAnalytics() {
+                this.analytics.visitors++;
+                this.analytics.views += this.products.length;
+                this.analytics.productsAdded = this.products.length;
+                
+                localStorage.setItem('storeAnalytics', JSON.stringify(this.analytics));
+                
+                document.getElementById('visitorsCount').textContent = this.analytics.visitors;
+                document.getElementById('totalViews').textContent = this.analytics.views;
+            }
+
+            saveProducts() {
+                localStorage.setItem('storeProducts', JSON.stringify(this.products));
+            }
+
+            saveTrashItems() {
+                localStorage.setItem('storeTrash', JSON.stringify(this.trashItems));
+            }
+
+            startCountdowns() {
+                // عدادات تنازلية للعروض
+                setInterval(() => {
+                    const now = new Date().getTime();
+                    const ramadanEnd = now + (7 * 60 * 60 * 1000); // 7 ساعات
+                    const clearanceEnd = now + (5 * 60 * 60 * 1000); // 5 ساعات
+                    
+                    document.getElementById('ramadanCountdown').textContent = this.formatCountdown(ramadanEnd);
+                    document.getElementById('clearanceCountdown').textContent = this.formatCountdown(clearanceEnd);
+                }, 1000);
+            }
+
+            formatCountdown(endTime) {
+                const now = new Date().getTime();
+                const distance = endTime - now;
+                
+                const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+                
+                return `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+            }
+        }
+
+        // نظام الحماية
+        class ProtectionSystem {
+            constructor() {
+                this.initProtection();
+            }
+
+            initProtection() {
+                // منع نسخ النصوص
+                document.addEventListener('copy', (e) => {
+                    e.preventDefault();
+                    this.showProtectionAlert('⚠️ لا يمكن نسخ النصوص - محمي بحقوق الطبع والنشر');
+                });
+
+                // منع حفظ الصور
+                document.addEventListener('contextmenu', (e) => {
+                    if (e.target.tagName === 'IMG') {
+                        e.preventDefault();
+                        this.showProtectionAlert('⚠️ لا يمكن حفظ الصور - محمي بحقوق الطبع والنشر');
+                    }
+                });
+
+                // منع سحب الصور
+                document.querySelectorAll('img').forEach(img => {
+                    img.addEventListener('dragstart', (e) => e.preventDefault());
+                });
+
+                // تنبيه عند مغادرة الصفحة
+                window.addEventListener('beforeunload', (e) => {
+                    e.preventDefault();
+                    e.returnValue = '⚖️ جميع الحقوق محفوظة لشركة جميل الحطامي';
+                });
+            }
+
+            showProtectionAlert(message) {
+                const alert = document.createElement('div');
+                alert.style.cssText = `
+                    position: fixed;
+                    top: 20px;
+                    right: 20px;
+                    background: #dc2626;
+                    color: white;
+                    padding: 1rem;
+                    border-radius: 5px;
+                    z-index: 10000;
+                    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+                `;
+                alert.textContent = message;
+                document.body.appendChild(alert);
+                
+                setTimeout(() => {
+                    alert.remove();
+                }, 3000);
+            }
+        }
+
+        // تفعيل العروض
+        function activateOffer(offerType) {
+            const offers = {
+                ramadan: 'عرض رمضان - خصم 20%',
+                clearance: 'عرض التصفية - خصم 30%'
+            };
+            
+            alert(`🎉 تم تفعيل ${offers[offerType]} بنجاح!`);
+            document.getElementById('activeOffers').textContent = '2';
+        }
+
+        // بدء التشغيل
+        const storeManager = new StoreManager();
+        new ProtectionSystem();
+
+        // إضافة بعض المنتجات الافتراضية إذا لم يكن هناك منتجات
+        if (storeManager.products.length === 0) {
+            const defaultProducts = [
+                {
+                    id: 1,
+                    name: "منتج مميز",
+                    price: "199",
+                    description: "منتج عالي الجودة مع ضمان الجودة",
+                    image: "https://via.placeholder.com/200x200/8B5FBF/ffffff?text=منتج+مميز",
+                    createdAt: new Date().toISOString()
+                },
+                {
+                    id: 2,
+                    name: "عرض خاص",
+                    price: "149",
+                    description: "عرض محدود لفترة قصيرة",
+                    image: "https://via.placeholder.com/200x200/6A4C9C/ffffff?text=عرض+خاص",
+                    createdAt: new Date().toISOString()
+                }
+            ];
+            
+            defaultProducts.forEach(product => {
+                storeManager.products.push(product);
+            });
+            storeManager.saveProducts();
+            storeManager.displayProducts();
+        }
+    </script>
+</body>
+</html>            box-sizing: border-box;
         }
         
         body {
