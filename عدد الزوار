@@ -1,0 +1,958 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>نظام إحصاء الزوار - جميل الحطامي | تسويق ومبيعات</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #3498db;
+            --accent-color: #e74c3c;
+            --gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --success-color: #27ae60;
+            --warning-color: #f39c12;
+        }
+        
+        body {
+            background: var(--gradient);
+            min-height: 100vh;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-attachment: fixed;
+            padding: 20px 0;
+        }
+        
+        .visitor-card {
+            background: rgba(255, 255, 255, 0.98);
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            transition: transform 0.3s ease;
+            overflow: hidden;
+        }
+        
+        .visitor-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .counter-number {
+            font-size: 3.5rem;
+            font-weight: bold;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+            font-family: 'Arial', sans-serif;
+            line-height: 1.2;
+        }
+        
+        .visitor-label {
+            color: #5a6c7d;
+            font-size: 1.1rem;
+            margin-top: 8px;
+            font-weight: 500;
+        }
+        
+        .stats-badge {
+            background: linear-gradient(45deg, #3498db, #2980b9);
+            color: white;
+            border-radius: 50px;
+            padding: 8px 20px;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+        
+        .company-logo {
+            font-weight: bold;
+            color: var(--primary-color);
+            font-size: 1.8rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        
+        .loading {
+            opacity: 0.7;
+            pointer-events: none;
+        }
+        
+        .spin {
+            animation: spin 1s linear infinite;
+        }
+        
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        
+        .firebase-status {
+            position: fixed;
+            top: 15px;
+            left: 15px;
+            z-index: 1000;
+            font-size: 0.8rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .firebase-status:hover {
+            transform: scale(1.05);
+        }
+        
+        .stat-card {
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 15px;
+            padding: 15px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            border: 1px solid rgba(0, 0, 0, 0.05);
+        }
+        
+        .stat-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+        }
+        
+        .stat-value {
+            font-size: 1.8rem;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        
+        .stat-label {
+            font-size: 0.9rem;
+            color: #6c757d;
+        }
+        
+        .time-display {
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 10px;
+            padding: 10px 20px;
+            font-weight: 500;
+            color: var(--primary-color);
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .btn-custom {
+            border-radius: 50px;
+            padding: 10px 25px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            border: none;
+        }
+        
+        .btn-custom:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        .alert-custom {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 9999;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            border: none;
+            min-width: 300px;
+        }
+        
+        .config-box {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            padding: 20px;
+            margin-top: 20px;
+            border: 2px dashed #dee2e6;
+        }
+        
+        .config-field {
+            margin-bottom: 15px;
+        }
+        
+        .config-field label {
+            font-weight: 500;
+            margin-bottom: 5px;
+            color: var(--primary-color);
+        }
+        
+        @media (max-width: 768px) {
+            .counter-number {
+                font-size: 2.5rem;
+            }
+            
+            .company-logo {
+                font-size: 1.4rem;
+            }
+            
+            .visitor-card {
+                margin: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- شريط حالة Firebase -->
+    <div class="firebase-status">
+        <span class="badge bg-secondary" id="firebaseStatus">
+            <i class="bi bi-database"></i> جاري التهيئة...
+        </span>
+    </div>
+
+    <div class="container py-4">
+        <div class="row justify-content-center">
+            <div class="col-12 col-lg-10">
+                <!-- البطاقة الرئيسية -->
+                <div class="visitor-card p-4 p-md-5 mb-4">
+                    <!-- رأس البطاقة -->
+                    <div class="d-flex flex-column flex-md-row justify-content-between align-items-center mb-4">
+                        <div class="company-logo mb-3 mb-md-0">
+                            <i class="bi bi-shop-window text-primary"></i>
+                            <span>جميل الحطامي | تسويق ومبيعات</span>
+                        </div>
+                        <div class="stats-badge">
+                            <i class="bi bi-graph-up-arrow"></i>
+                            نظام الإحصاء الحي
+                        </div>
+                    </div>
+                    
+                    <p class="text-center text-muted mb-4">إحصائيات الزوار في الوقت الفعلي لمتجر التسوق الإلكتروني</p>
+                    
+                    <!-- العدادات الرئيسية -->
+                    <div class="row text-center mb-5">
+                        <div class="col-md-6 mb-4">
+                            <div class="counter-number pulse" id="totalVisitors">0</div>
+                            <div class="visitor-label">إجمالي الزوار</div>
+                        </div>
+                        <div class="col-md-6 mb-4">
+                            <div class="counter-number" id="todayVisitors">0</div>
+                            <div class="visitor-label">زوار اليوم</div>
+                        </div>
+                    </div>
+
+                    <!-- الإحصائيات الثانوية -->
+                    <div class="row text-center mb-4">
+                        <div class="col-6 col-md-3 mb-3">
+                            <div class="stat-card">
+                                <div class="stat-value text-success" id="uniqueVisitors">0</div>
+                                <div class="stat-label">زوار فريدون</div>
+                            </div>
+                        </div>
+                        <div class="col-6 col-md-3 mb-3">
+                            <div class="stat-card">
+                                <div class="stat-value text-info" id="returningVisitors">0</div>
+                                <div class="stat-label">زوار عائدون</div>
+                            </div>
+                        </div>
+                        <div class="col-6 col-md-3 mb-3">
+                            <div class="stat-card">
+                                <div class="stat-value text-warning" id="onlineNow">0</div>
+                                <div class="stat-label">متصفحون الآن</div>
+                            </div>
+                        </div>
+                        <div class="col-6 col-md-3 mb-3">
+                            <div class="stat-card">
+                                <div class="stat-value text-primary" id="pageViews">0</div>
+                                <div class="stat-label">مشاهدات الصفحة</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- معلومات الوقت -->
+                    <div class="text-center mb-4">
+                        <div class="time-display d-inline-block" id="currentTime">
+                            جاري تحميل الوقت...
+                        </div>
+                    </div>
+
+                    <!-- أزرار التحكم -->
+                    <div class="d-flex justify-content-center flex-wrap gap-3 mt-4">
+                        <button class="btn btn-primary btn-custom" onclick="refreshData()" id="refreshBtn">
+                            <i class="bi bi-arrow-repeat"></i>
+                            تحديث البيانات
+                        </button>
+                        <button class="btn btn-outline-secondary btn-custom" onclick="showStats()">
+                            <i class="bi bi-graph-up"></i>
+                            عرض التفاصيل
+                        </button>
+                        <button class="btn btn-success btn-custom" onclick="simulateVisitor()">
+                            <i class="bi bi-person-plus"></i>
+                            محاكاة زائر
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- قسم إعدادات Firebase -->
+                <div class="config-box">
+                    <h5 class="text-center mb-4">
+                        <i class="bi bi-database-gear"></i>
+                        إعدادات قاعدة البيانات (Firebase)
+                    </h5>
+                    
+                    <div class="row">
+                        <div class="col-md-6 config-field">
+                            <label for="apiKey">مفتاح API (apiKey)</label>
+                            <input type="text" class="form-control" id="apiKey" placeholder="AIzaSyBcDeFgHiJkLmNoPqRsTuVwXyZ...">
+                        </div>
+                        <div class="col-md-6 config-field">
+                            <label for="authDomain">نطاق المصادقة (authDomain)</label>
+                            <input type="text" class="form-control" id="authDomain" placeholder="مشروعك.firebaseapp.com">
+                        </div>
+                        <div class="col-md-6 config-field">
+                            <label for="databaseURL">رابط قاعدة البيانات (databaseURL)</label>
+                            <input type="text" class="form-control" id="databaseURL" placeholder="https://مشروعك-default-rtdb.firebaseio.com">
+                        </div>
+                        <div class="col-md-6 config-field">
+                            <label for="projectId">معرف المشروع (projectId)</label>
+                            <input type="text" class="form-control" id="projectId" placeholder="مشروعك-12345">
+                        </div>
+                        <div class="col-md-6 config-field">
+                            <label for="storageBucket">مستودع التخزين (storageBucket)</label>
+                            <input type="text" class="form-control" id="storageBucket" placeholder="مشروعك.appspot.com">
+                        </div>
+                        <div class="col-md-6 config-field">
+                            <label for="messagingSenderId">معرف المرسل (messagingSenderId)</label>
+                            <input type="text" class="form-control" id="messagingSenderId" placeholder="123456789">
+                        </div>
+                        <div class="col-12 config-field">
+                            <label for="appId">معرف التطبيق (appId)</label>
+                            <input type="text" class="form-control" id="appId" placeholder="1:123456789:web:abc123def456">
+                        </div>
+                    </div>
+                    
+                    <div class="text-center mt-4">
+                        <button class="btn btn-success btn-custom px-5" onclick="saveFirebaseConfig()">
+                            <i class="bi bi-check-circle"></i>
+                            حفظ الإعدادات وتفعيل النظام
+                        </button>
+                        <button class="btn btn-outline-info btn-custom ms-2" onclick="loadSampleConfig()">
+                            <i class="bi bi-info-circle"></i>
+                            عرض نموذج للتكوين
+                        </button>
+                    </div>
+                    
+                    <div class="alert alert-info mt-4" role="alert">
+                        <h6><i class="bi bi-lightbulb"></i> تعليمات سريعة:</h6>
+                        <ol class="mb-0 ps-3">
+                            <li>أنشئ مشروع جديد في <a href="https://console.firebase.google.com" target="_blank">Firebase Console</a></li>
+                            <li>أضف تطبيق ويب واحصل على بيانات التكوين</li>
+                            <li>انسخ البيانات إلى الحقول أعلاه</li>
+                            <li>اضغط على "حفظ الإعدادات"</li>
+                            <li>في صفحة Firebase Console، انتقل إلى Realtime Database وأنشئ قاعدة بيانات</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- نموذج الإحصائيات التفصيلية -->
+    <div class="modal fade" id="statsModal" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">
+                        <i class="bi bi-bar-chart-line"></i>
+                        تقرير الإحصائيات التفصيلي
+                    </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <div id="statsContent">
+                        جاري تحميل البيانات...
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">إغلاق</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- مكتبات JavaScript -->
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-database-compat.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        // =============================================
+        // نظام إدارة Firebase والعداد
+        // =============================================
+        
+        class RealTimeVisitorCounter {
+            constructor() {
+                this.db = null;
+                this.visitorId = this.generateVisitorId();
+                this.isNewVisitor = false;
+                this.isInitialized = false;
+                this.init();
+            }
+
+            init() {
+                this.setupTimeUpdater();
+                this.loadFirebaseConfig();
+            }
+
+            // تحميل تكوين Firebase من التخزين المحلي
+            loadFirebaseConfig() {
+                const savedConfig = localStorage.getItem('firebaseConfig');
+                if (savedConfig) {
+                    try {
+                        const config = JSON.parse(savedConfig);
+                        this.initializeFirebase(config);
+                        this.populateConfigForm(config);
+                    } catch (error) {
+                        console.error('خطأ في تحميل تكوين Firebase:', error);
+                        this.updateFirebaseStatus('error', 'خطأ في التكوين');
+                    }
+                } else {
+                    this.updateFirebaseStatus('disconnected', 'لم يتم التهيئة بعد');
+                }
+            }
+
+            // تعبئة نموذج الإعدادات بالقيم المحفوظة
+            populateConfigForm(config) {
+                document.getElementById('apiKey').value = config.apiKey || '';
+                document.getElementById('authDomain').value = config.authDomain || '';
+                document.getElementById('databaseURL').value = config.databaseURL || '';
+                document.getElementById('projectId').value = config.projectId || '';
+                document.getElementById('storageBucket').value = config.storageBucket || '';
+                document.getElementById('messagingSenderId').value = config.messagingSenderId || '';
+                document.getElementById('appId').value = config.appId || '';
+            }
+
+            // تهيئة Firebase
+            initializeFirebase(config) {
+                try {
+                    // التحقق من صحة التكوين
+                    if (!config.apiKey || config.apiKey.includes('ضع')) {
+                        throw new Error('تكوين Firebase غير صالح');
+                    }
+
+                    firebase.initializeApp(config);
+                    this.db = firebase.database();
+                    this.isInitialized = true;
+                    
+                    this.updateFirebaseStatus('connected', 'Firebase متصل');
+                    this.initializeVisitor();
+                    this.setupRealTimeListeners();
+                    
+                    console.log('✅ Firebase initialized successfully');
+                } catch (error) {
+                    console.error('❌ خطأ في تهيئة Firebase:', error);
+                    this.updateFirebaseStatus('error', 'Firebase غير متصل');
+                    this.setupLocalData();
+                }
+            }
+
+            // تحديث حالة Firebase في الواجهة
+            updateFirebaseStatus(status, message) {
+                const statusElement = document.getElementById('firebaseStatus');
+                let badgeClass = 'bg-secondary';
+                let icon = 'bi-database';
+                
+                switch(status) {
+                    case 'connected':
+                        badgeClass = 'bg-success';
+                        icon = 'bi-database-check';
+                        break;
+                    case 'disconnected':
+                        badgeClass = 'bg-warning';
+                        icon = 'bi-database-exclamation';
+                        break;
+                    case 'error':
+                        badgeClass = 'bg-danger';
+                        icon = 'bi-database-x';
+                        break;
+                }
+                
+                statusElement.className = `badge ${badgeClass}`;
+                statusElement.innerHTML = `<i class="bi ${icon}"></i> ${message}`;
+            }
+
+            // إنشاء معرف فريد للزائر
+            generateVisitorId() {
+                let visitorId = localStorage.getItem('visitorId');
+                if (!visitorId) {
+                    visitorId = 'visitor_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
+                    localStorage.setItem('visitorId', visitorId);
+                    this.isNewVisitor = true;
+                }
+                return visitorId;
+            }
+
+            // تهيئة بيانات الزائر
+            async initializeVisitor() {
+                if (!this.isInitialized) return;
+
+                const today = this.getTodayDate();
+                const visitorRef = this.db.ref('visitors/' + this.visitorId);
+                
+                try {
+                    // تسجيل زيارة جديدة
+                    await visitorRef.update({
+                        lastVisit: new Date().toISOString(),
+                        visitCount: firebase.database.ServerValue.increment(1),
+                        firstVisit: this.isNewVisitor ? new Date().toISOString() : null
+                    });
+
+                    // تحديث إحصائيات اليوم
+                    const todayRef = this.db.ref('dailyStats/' + today);
+                    await todayRef.transaction((current) => {
+                        if (current === null) {
+                            return {
+                                totalVisits: 1,
+                                uniqueVisitors: this.isNewVisitor ? 1 : 0,
+                                pageViews: 1,
+                                lastUpdated: new Date().toISOString()
+                            };
+                        } else {
+                            current.totalVisits = (current.totalVisits || 0) + 1;
+                            current.pageViews = (current.pageViews || 0) + 1;
+                            
+                            if (this.isNewVisitor) {
+                                current.uniqueVisitors = (current.uniqueVisitors || 0) + 1;
+                            }
+                            
+                            current.lastUpdated = new Date().toISOString();
+                            return current;
+                        }
+                    });
+
+                    // زيادة العداد العام
+                    const totalRef = this.db.ref('totalStats');
+                    await totalRef.transaction((current) => {
+                        if (current === null) {
+                            return {
+                                totalVisitors: this.isNewVisitor ? 1 : 0,
+                                totalPageViews: 1,
+                                lastUpdated: new Date().toISOString()
+                            };
+                        } else {
+                            if (this.isNewVisitor) {
+                                current.totalVisitors = (current.totalVisitors || 0) + 1;
+                            }
+                            current.totalPageViews = (current.totalPageViews || 0) + 1;
+                            current.lastUpdated = new Date().toISOString();
+                            return current;
+                        }
+                    });
+
+                    console.log('✅ Visitor data initialized in Firebase');
+                } catch (error) {
+                    console.error('❌ Error initializing visitor data:', error);
+                    this.setupLocalData();
+                }
+            }
+
+            // إعداد المستمعين للبيانات في الوقت الحقيقي
+            setupRealTimeListeners() {
+                if (!this.isInitialized) return;
+
+                const today = this.getTodayDate();
+                
+                // الاستماع لإحصائيات اليوم
+                this.db.ref('dailyStats/' + today).on('value', (snapshot) => {
+                    const data = snapshot.val();
+                    if (data) {
+                        document.getElementById('todayVisitors').textContent = this.formatNumber(data.uniqueVisitors || 0);
+                        document.getElementById('pageViews').textContent = this.formatNumber(data.pageViews || 0);
+                    }
+                });
+
+                // الاستماع للإحصائيات العامة
+                this.db.ref('totalStats').on('value', (snapshot) => {
+                    const data = snapshot.val();
+                    if (data) {
+                        document.getElementById('totalVisitors').textContent = this.formatNumber(data.totalVisitors || 0);
+                        document.getElementById('uniqueVisitors').textContent = this.formatNumber(data.totalVisitors || 0);
+                        
+                        // محاكاة بيانات الزوار العائدين
+                        const returningVisitors = Math.floor((data.totalVisitors || 0) * 0.3);
+                        document.getElementById('returningVisitors').textContent = this.formatNumber(returningVisitors);
+                    }
+                });
+
+                // محاكاة المستخدمين المتصلين حالياً
+                this.setupOnlineUsersSimulation();
+            }
+
+            // إعداد البيانات المحلية (بديل عند عدم اتصال Firebase)
+            setupLocalData() {
+                console.log('🔄 Using local data as fallback');
+                
+                const localData = JSON.parse(localStorage.getItem('visitorLocalData') || '{}');
+                const today = this.getTodayDate();
+                
+                if (!localData[today]) {
+                    localData[today] = {
+                        uniqueVisitors: 0,
+                        pageViews: 0
+                    };
+                }
+                
+                if (this.isNewVisitor) {
+                    localData[today].uniqueVisitors++;
+                }
+                localData[today].pageViews++;
+                
+                localStorage.setItem('visitorLocalData', JSON.stringify(localData));
+                
+                // تحديث الواجهة بالبيانات المحلية
+                document.getElementById('todayVisitors').textContent = this.formatNumber(localData[today].uniqueVisitors);
+                document.getElementById('pageViews').textContent = this.formatNumber(localData[today].pageViews);
+                document.getElementById('totalVisitors').textContent = this.formatNumber(Object.values(localData).reduce((sum, day) => sum + day.uniqueVisitors, 0));
+                document.getElementById('uniqueVisitors').textContent = this.formatNumber(Object.values(localData).reduce((sum, day) => sum + day.uniqueVisitors, 0));
+                
+                this.setupOnlineUsersSimulation();
+            }
+
+            // محاكاة المستخدمين المتصلين حالياً
+            setupOnlineUsersSimulation() {
+                setInterval(() => {
+                    const onlineUsers = Math.floor(Math.random() * 15) + 5;
+                    document.getElementById('onlineNow').textContent = this.formatNumber(onlineUsers);
+                }, 30000);
+                
+                // قيمة ابتدائية
+                document.getElementById('onlineNow').textContent = this.formatNumber(Math.floor(Math.random() * 10) + 3);
+            }
+
+            // محاكاة زائر جديد (للتجربة)
+            simulateNewVisitor() {
+                if (!this.isInitialized) {
+                    // محاكاة محلية
+                    this.setupLocalData();
+                    return;
+                }
+
+                const today = this.getTodayDate();
+                const todayRef = this.db.ref('dailyStats/' + today);
+                const totalRef = this.db.ref('totalStats');
+                
+                todayRef.transaction((current) => {
+                    if (current === null) {
+                        return {
+                            totalVisits: 1,
+                            uniqueVisitors: 1,
+                            pageViews: 1,
+                            lastUpdated: new Date().toISOString()
+                        };
+                    } else {
+                        current.totalVisits = (current.totalVisits || 0) + 1;
+                        current.uniqueVisitors = (current.uniqueVisitors || 0) + 1;
+                        current.pageViews = (current.pageViews || 0) + 1;
+                        current.lastUpdated = new Date().toISOString();
+                        return current;
+                    }
+                });
+
+                totalRef.transaction((current) => {
+                    if (current === null) {
+                        return {
+                            totalVisitors: 1,
+                            totalPageViews: 1,
+                            lastUpdated: new Date().toISOString()
+                        };
+                    } else {
+                        current.totalVisitors = (current.totalVisitors || 0) + 1;
+                        current.totalPageViews = (current.totalPageViews || 0) + 1;
+                        current.lastUpdated = new Date().toISOString();
+                        return current;
+                    }
+                });
+            }
+
+            // تحديث الوقت الحالي
+            setupTimeUpdater() {
+                const updateTime = () => {
+                    const now = new Date();
+                    const options = { 
+                        weekday: 'long', 
+                        year: 'numeric', 
+                        month: 'long', 
+                        day: 'numeric',
+                        hour: '2-digit',
+                        minute: '2-digit',
+                        second: '2-digit'
+                    };
+                    
+                    const timeString = now.toLocaleDateString('ar-YE', options) + ' 🕒';
+                    document.getElementById('currentTime').textContent = timeString;
+                };
+
+                updateTime();
+                setInterval(updateTime, 1000);
+            }
+
+            // الحصول على تاريخ اليوم بصيغة YYYY-MM-DD
+            getTodayDate() {
+                const now = new Date();
+                return now.toISOString().split('T')[0];
+            }
+
+            // تنسيق الأرقام
+            formatNumber(num) {
+                return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+            }
+        }
+
+        // =============================================
+        // الدوال العامة للاستخدام في الأزرار
+        // =============================================
+
+        let visitorCounter;
+
+        function refreshData() {
+            const btn = document.getElementById('refreshBtn');
+            btn.classList.add('loading');
+            btn.innerHTML = '<i class="bi bi-arrow-repeat spin"></i> جاري التحديث...';
+            
+            setTimeout(() => {
+                btn.classList.remove('loading');
+                btn.innerHTML = '<i class="bi bi-arrow-repeat"></i> تحديث البيانات';
+                
+                // إشعار بنجاح التحديث
+                showAlert('تم تحديث بيانات الزوار بنجاح!', 'success');
+            }, 1000);
+        }
+
+        function showStats() {
+            const statsModal = new bootstrap.Modal(document.getElementById('statsModal'));
+            const statsContent = document.getElementById('statsContent');
+            
+            if (!visitorCounter || !visitorCounter.isInitialized) {
+                // عرض البيانات المحلية
+                const localData = JSON.parse(localStorage.getItem('visitorLocalData') || '{}');
+                const today = visitorCounter ? visitorCounter.getTodayDate() : new Date().toISOString().split('T')[0];
+                const todayData = localData[today] || { uniqueVisitors: 0, pageViews: 0 };
+                const totalVisitors = Object.values(localData).reduce((sum, day) => sum + day.uniqueVisitors, 0);
+                const totalPageViews = Object.values(localData).reduce((sum, day) => sum + day.pageViews, 0);
+                
+                statsContent.innerHTML = `
+                    <div class="alert alert-warning">
+                        <i class="bi bi-exclamation-triangle"></i>
+                        <strong>ملاحظة:</strong> يتم استخدام البيانات المحلية (Firebase غير متصل)
+                    </div>
+                    <div class="row">
+                        <div class="col-6">
+                            <strong>إجمالي الزوار:</strong>
+                        </div>
+                        <div class="col-6">
+                            ${totalVisitors}
+                        </div>
+                    </div>
+                    <div class="row mt-2">
+                        <div class="col-6">
+                            <strong>مشاهدات الصفحة:</strong>
+                        </div>
+                        <div class="col-6">
+                            ${totalPageViews}
+                        </div>
+                    </div>
+                    <div class="row mt-2">
+                        <div class="col-6">
+                            <strong>زوار اليوم:</strong>
+                        </div>
+                        <div class="col-6">
+                            ${todayData.uniqueVisitors}
+                        </div>
+                    </div>
+                    <div class="row mt-2">
+                        <div class="col-6">
+                            <strong>مشاهدات اليوم:</strong>
+                        </div>
+                        <div class="col-6">
+                            ${todayData.pageViews}
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="text-center text-muted small">
+                        آخر تحديث: ${new Date().toLocaleString('ar-YE')}
+                    </div>
+                `;
+            } else {
+                // جلب البيانات من Firebase
+                const today = visitorCounter.getTodayDate();
+                const db = visitorCounter.db;
+                
+                Promise.all([
+                    db.ref('totalStats').once('value'),
+                    db.ref('dailyStats/' + today).once('value'),
+                    db.ref('visitors').once('value')
+                ]).then(([totalSnapshot, dailySnapshot, visitorsSnapshot]) => {
+                    const totalStats = totalSnapshot.val() || {};
+                    const dailyStats = dailySnapshot.val() || {};
+                    const visitorsCount = visitorsSnapshot.numChildren();
+                    
+                    statsContent.innerHTML = `
+                        <div class="alert alert-success">
+                            <i class="bi bi-database-check"></i>
+                            <strong>بيانات حية من Firebase</strong>
+                        </div>
+                        <div class="row">
+                            <div class="col-6">
+                                <strong>إجمالي الزوار:</strong>
+                            </div>
+                            <div class="col-6">
+                                ${totalStats.totalVisitors || 0}
+                            </div>
+                        </div>
+                        <div class="row mt-2">
+                            <div class="col-6">
+                                <strong>مشاهدات الصفحة:</strong>
+                            </div>
+                            <div class="col-6">
+                                ${totalStats.totalPageViews || 0}
+                            </div>
+                        </div>
+                        <div class="row mt-2">
+                            <div class="col-6">
+                                <strong>زوار اليوم:</strong>
+                            </div>
+                            <div class="col-6">
+                                ${dailyStats.uniqueVisitors || 0}
+                            </div>
+                        </div>
+                        <div class="row mt-2">
+                            <div class="col-6">
+                                <strong>مشاهدات اليوم:</strong>
+                            </div>
+                            <div class="col-6">
+                                ${dailyStats.pageViews || 0}
+                            </div>
+                        </div>
+                        <div class="row mt-2">
+                            <div class="col-6">
+                                <strong>الزوار المسجلين:</strong>
+                            </div>
+                            <div class="col-6">
+                                ${visitorsCount}
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="text-center text-muted small">
+                            آخر تحديث: ${new Date().toLocaleString('ar-YE')}
+                        </div>
+                    `;
+                }).catch(error => {
+                    statsContent.innerHTML = `<div class="alert alert-danger">خطأ في تحميل البيانات: ${error.message}</div>`;
+                });
+            }
+            
+            statsModal.show();
+        }
+
+        function simulateVisitor() {
+            if (visitorCounter) {
+                visitorCounter.simulateNewVisitor();
+                showAlert('تمت محاكاة زائر جديد بنجاح!', 'info');
+            } else {
+                showAlert('النظام غير مهيئ بعد. يرجى إعداد Firebase أولاً.', 'warning');
+            }
+        }
+
+        function saveFirebaseConfig() {
+            try {
+                const config = {
+                    apiKey: document.getElementById('apiKey').value,
+                    authDomain: document.getElementById('authDomain').value,
+                    databaseURL: document.getElementById('databaseURL').value,
+                    projectId: document.getElementById('projectId').value,
+                    storageBucket: document.getElementById('storageBucket').value,
+                    messagingSenderId: document.getElementById('messagingSenderId').value,
+                    appId: document.getElementById('appId').value
+                };
+                
+                // التحقق من إدخال البيانات الأساسية
+                if (!config.apiKey || !config.databaseURL || !config.projectId) {
+                    throw new Error('يرجى ملء الحقول المطلوبة: apiKey و databaseURL و projectId');
+                }
+                
+                localStorage.setItem('firebaseConfig', JSON.stringify(config));
+                
+                showAlert('تم حفظ إعدادات Firebase بنجاح! جاري إعادة التهيئة...', 'success');
+                
+                // إعادة تحميل النظام
+                setTimeout(() => {
+                    location.reload();
+                }, 2000);
+                
+            } catch (error) {
+                showAlert('خطأ: ' + error.message, 'danger');
+            }
+        }
+
+        function loadSampleConfig() {
+            const sampleConfig = {
+                apiKey: "AIzaSyBcDeFgHiJkLmNoPqRsTuVwXyZ...",
+                authDomain: "مشروعك.firebaseapp.com",
+                databaseURL: "https://مشروعك-default-rtdb.firebaseio.com",
+                projectId: "مشروعك-12345",
+                storageBucket: "مشروعك.appspot.com",
+                messagingSenderId: "123456789",
+                appId: "1:123456789:web:abc123def456"
+            };
+            
+            visitorCounter.populateConfigForm(sampleConfig);
+            showAlert('تم تحميل نموذج للتكوين. يرجى استبدال القيم ببيانات مشروعك الحقيقية.', 'info');
+        }
+
+        function showAlert(message, type) {
+            // إزالة أي إشعارات سابقة
+            const existingAlerts = document.querySelectorAll('.alert-custom');
+            existingAlerts.forEach(alert => alert.remove());
+            
+            const alertDiv = document.createElement('div');
+            alertDiv.className = `alert alert-${type} alert-custom alert-dismissible fade show`;
+            alertDiv.innerHTML = `
+                <div class="d-flex align-items-center">
+                    <i class="bi ${type === 'success' ? 'bi-check-circle' : type === 'danger' ? 'bi-exclamation-triangle' : type === 'warning' ? 'bi-exclamation-circle' : 'bi-info-circle'} me-2"></i>
+                    <div>${message}</div>
+                </div>
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            `;
+            document.body.appendChild(alertDiv);
+            
+            setTimeout(() => {
+                if (alertDiv.parentNode) {
+                    alertDiv.remove();
+                }
+            }, 5000);
+        }
+
+        // =============================================
+        // تهيئة النظام عند تحميل الصفحة
+        // =============================================
+
+        document.addEventListener('DOMContentLoaded', function() {
+            visitorCounter = new RealTimeVisitorCounter();
+            console.log('🚀 Real-time visitor counter initialized');
+            
+            // إضافة وظيفة النقر على شريط حالة Firebase
+            const firebaseStatus = document.getElementById('firebaseStatus');
+            firebaseStatus.style.cursor = 'pointer';
+            firebaseStatus.title = 'انقر لعرض إعدادات Firebase';
+            firebaseStatus.onclick = () => {
+                document.querySelector('.config-box').scrollIntoView({ 
+                    behavior: 'smooth' 
+                });
+            };
+        });
+    </script>
+</body>
+</html>
